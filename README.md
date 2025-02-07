@@ -90,7 +90,9 @@ Crée un nouveau médecin dans le système.
 curl -X POST http://localhost:3000/api/v1/doctors   -H "Content-Type: application/json"   -d '{
     "firstName": "Alice",
     "lastName": "Dupont",
-    "job": "Cardiologie"
+    "job": "Cardiologie",
+    "email": "alice@gmail.com",
+    "password": "password"
   }'
 ```
 
@@ -119,16 +121,16 @@ curl http://localhost:3000/api/v1/doctors/1
 ### 4. Mettre à Jour un Médecin (PUT)
 
 #### Endpoint: `/doctors/:id`
-Met à jour les informations d'un médecin selon son ID.
+Met à jour les informations d'un médecin selon son ID. Cette requête nécessite un token d'authentification.
 
 **Commande Curl :**
 
 ```bash
-curl -X PUT http://localhost:3000/api/v1/doctors/2   -H "Content-Type: application/json"   -d '{
-    "firstName": "Pierre",
-    "lastName": "Martin",
-    "job": "Médecin généraliste"
-  }'
+curl -X PUT http://localhost:3000/api/v1/doctors/1   -H "Content-Type: application/json"   -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGljZUBnbWFpbC5jb20iLCJpYXQiOjE3Mzg5NDMxMzYsImV4cCI6MTczODk1MDMzNn0.88FYeWpj0zovxjFJQHP_S9V4XXYHMmc5nX4673ZSl58"   -d '{
+    "firstName": "Alice",
+    "lastName": "Dupont",
+    "job": "Cardiologie"
+}'
 ```
 
 ### 5. Supprimer un Médecin (DELETE)
@@ -208,3 +210,15 @@ Supprime un patient selon son ID.
 curl -X DELETE http://localhost:3000/api/v1/patients/1
 ```
 Penser à changer l'id du patient par un id existant.
+
+### 11. Login médecin (POST)
+
+**Commande Curl :**
+
+```bash
+curl -X POST http://localhost:3000/api/v1/doctors/login   -H "Content-Type: application/json"   -d '{
+    "email": "alice@gmail.com",
+    "password": "password"
+    }'
+```
+Pensez à récupérer le token pour les prochaines requêtes.

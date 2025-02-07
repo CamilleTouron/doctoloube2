@@ -25,6 +25,10 @@ model Doctor {
   firstName    String
   lastName     String
   job          String
+  email        String        @unique
+  password     String
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
   patients     Patient[]
   appointments Appointment[]
   telephone    Telephone[]
