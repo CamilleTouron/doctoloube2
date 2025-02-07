@@ -124,7 +124,7 @@ Met à jour les informations d'un médecin selon son ID.
 **Commande Curl :**
 
 ```bash
-curl -X PUT http://localhost:3000/api/v1/doctors/1   -H "Content-Type: application/json"   -d '{
+curl -X PUT http://localhost:3000/api/v1/doctors/2   -H "Content-Type: application/json"   -d '{
     "firstName": "Pierre",
     "lastName": "Martin",
     "job": "Médecin généraliste"
