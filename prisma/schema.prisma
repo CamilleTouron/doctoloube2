@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Patient {
+  id           Int           @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  birthDate    DateTime
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  telephones   Telephone[]
+  doctorId     Int
+  doctor       Doctor        @relation(fields: [doctorId], references: [id])
+  appointments Appointment[]
+}
+
+model Doctor {
+  id           Int           @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  job          String
+  patients     Patient[]
+  appointments Appointment[]
+  telephone    Telephone[]
+}
+
+model Appointment {
+  id        Int      @id @default(autoincrement())
+  start     DateTime
+  end       DateTime
+  patientId Int
+  patient   Patient  @relation(fields: [patientId], references: [id])
+  doctorId  Int
+  doctor    Doctor   @relation(fields: [doctorId], references: [id])
+}
+
+model Telephone {
+  id        Int      @id @default(autoincrement())
+  number    String
+  type      String
+  patientId Int?
+  patient   Patient? @relation(fields: [patientId], references: [id])
+  doctorId  Int?
+  doctor    Doctor?  @relation(fields: [doctorId], references: [id])
+}
